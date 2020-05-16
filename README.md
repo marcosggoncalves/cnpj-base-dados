@@ -1,5 +1,19 @@
 # Importação CNPJ
 
+### Realiza a conexão com banco de dados POSTGRES
+	
+	user: postgres
+	senha: root
+	url: localhost
+	port: 5432
+	database:cnpj_empresas
+
+	Sintaxe:
+		- postgresql://<user>:<senha>@<url>:<port>/<database>
+
+Exemplo:
+	- postgresql://postgres:root@localhost:5432/cnpj_empresas
+
 ### Criar pastas
 	 - arquivos
 	 - blocos
