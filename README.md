@@ -14,7 +14,7 @@
 
 
 #### Exemplo:
-- postgresql://postgres:root@localhost:5432/cnpj_empresas
+    - postgresql://postgres:root@localhost:5432/cnpj_empresas
 
 
 ### Criar pastas
@@ -32,7 +32,7 @@
 
 <a href="http://receita.economia.gov.br/orientacao/tributaria/cadastros/cadastro-nacional-de-pessoas-juridicas-cnpj/dados-publicos-cnpj">Acessar site Receita Federal</a>
 
-#### Adicione o arquivo "baixado no site" dentro da  pasta "arquivos"
+	Adicione o arquivo "baixado no site" dentro da  pasta "arquivos"
 
 ### Comandos para execução
 	
