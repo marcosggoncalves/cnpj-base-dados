@@ -1,7 +1,6 @@
 
 const linebyline = require('linebyline');
 const fs = require('fs');
-
 const consultas = require('./database/consultas.js');
 const format = require('./format.js');
 

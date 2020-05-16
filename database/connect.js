@@ -4,4 +4,4 @@ const connectionString = 'postgresql://postgres:root@localhost:5432/cnpj_empresa
 
 module.exports = new Pool({
     connectionString: connectionString,
-})
+});

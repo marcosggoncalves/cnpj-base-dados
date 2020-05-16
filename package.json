@@ -1,12 +1,12 @@
 {
   "name": "node",
   "version": "1.0.0",
-  "description": "",
+  "description": "Importação para criação da base dados CNPJ do brasil inteiro",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Marcos Lopes - Dourasoft",
   "license": "ISC",
   "dependencies": {
     "linebyline": "^1.3.0",

@@ -40,6 +40,7 @@ class Format {
                 "arquivo": arquivo
             };
         }
+
         if (linha.substr(0, 1).trim() === '2') {
             return {
                 "cnpj": linha.substr(3, 14).trim(),
@@ -58,11 +59,20 @@ class Format {
             };
         }
 
+        if (linha.substr(0, 1).trim() === '6') {
+            return {
+                "tipo" : linha.substr(0, 1).trim(),
+                "cnpj" : linha.substr(3, 14).trim(),
+                "cnae" : linha.substr(17, 7).trim(),
+                "arquivo" : arquivo
+            };
+        }
+
         return {};
     }
     array(linha, arquivo = null) {
         if (linha.substr(0, 1).trim() === '1') {
-            let cadastro = [
+            return [
                 linha.substr(3, 14).trim(),
                 linha.substr(0, 1).trim(),
                 linha.substr(18, 150).trim(),
@@ -100,11 +110,10 @@ class Format {
                 linha.substr(948, 8).trim(),
                 arquivo
             ];
-
-            return cadastro;
         }
+        
         if (linha.substr(0, 1).trim() === '2') {
-            let socios = [
+            return [
                 linha.substr(3, 14).trim(),
                 linha.substr(17, 1).trim(),
                 linha.substr(18, 150).trim(),
@@ -119,19 +128,15 @@ class Format {
                 linha.substr(341, 2).trim(),
                 arquivo
             ];
-
-            return socios;
         }
 
         if (linha.substr(0, 1).trim() === '6') {
-            let cnaes = [
+            return  [
                 linha.substr(0, 1).trim(),
                 linha.substr(3, 14).trim(),
                 linha.substr(17, 7).trim(),
                 arquivo
             ];
-
-            return cnaes;
         }
 
         return [];

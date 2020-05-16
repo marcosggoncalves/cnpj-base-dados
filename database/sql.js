@@ -30,7 +30,6 @@ const socio = `INSERT INTO socios(
                     $13
                 ) RETURNING *`;
 
-
 const cnae = `INSERT INTO cnaes(
                     tipo,
                     cnpj,
@@ -39,7 +38,6 @@ const cnae = `INSERT INTO cnaes(
                 )
                 VALUES ($1, $2, $3, $4)  RETURNING *;
             `;
-
 
 const  empresa = `INSERT INTO empresas(
                 cnpj,
