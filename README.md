@@ -11,8 +11,8 @@
 	Sintaxe:
 		- postgresql://<user>:<senha>@<url>:<port>/<database>
 
-Exemplo:
-	- postgresql://postgres:root@localhost:5432/cnpj_empresas
+	Exemplo:
+		- postgresql://postgres:root@localhost:5432/cnpj_empresas
 
 ### Criar pastas
 	 - arquivos
