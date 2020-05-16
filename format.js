@@ -1,5 +1,5 @@
 class Format {
-    object(linha, arquivo_id = null) {
+    object(linha, arquivo = null) {
         if (linha.substr(0, 1).trim() === '1') {
             return {
                 "cnpj": linha.substr(3, 14).trim(),
@@ -37,7 +37,7 @@ class Format {
                 "opcaoPeloMei": linha.substr(924, 1).trim(),
                 "situacaoEspecial": linha.substr(925, 23).trim(),
                 "dataSituacaoEspecial": linha.substr(948, 8).trim(),
-                "arquivo_id": arquivo_id
+                "arquivo": arquivo
             };
         }
         if (linha.substr(0, 1).trim() === '2') {
@@ -54,13 +54,13 @@ class Format {
                 "cpfRepresentanteLegal": linha.substr(270, 11).trim(),
                 "nomeRepresentante": linha.substr(281, 60).trim(),
                 "codQualificacaoRepresentante": linha.substr(341, 2).trim(),
-                "arquivo_id": arquivo_id
+                "arquivo": arquivo
             };
         }
 
         return {};
     }
-    array(linha, arquivo_id = null) {
+    array(linha, arquivo = null) {
         if (linha.substr(0, 1).trim() === '1') {
             let cadastro = [
                 linha.substr(3, 14).trim(),
@@ -98,7 +98,7 @@ class Format {
                 linha.substr(924, 1).trim(),
                 linha.substr(925, 23).trim(),
                 linha.substr(948, 8).trim(),
-                arquivo_id
+                arquivo
             ];
 
             return cadastro;
@@ -117,7 +117,7 @@ class Format {
                 linha.substr(270, 11).trim(),
                 linha.substr(281, 60).trim(),
                 linha.substr(341, 2).trim(),
-                arquivo_id
+                arquivo
             ];
 
             return socios;
@@ -127,7 +127,8 @@ class Format {
             let cnaes = [
                 linha.substr(0, 1).trim(),
                 linha.substr(3, 14).trim(),
-                linha.substr(17, 7).trim()
+                linha.substr(17, 7).trim(),
+                arquivo
             ];
 
             return cnaes;
