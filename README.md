@@ -1,5 +1,7 @@
 # Importação CNPJ
 
+### Não esqueça "npm install" para instalar as dependencias
+
 ### Realiza a conexão com banco de dados POSTGRES
 	
 	user: postgres
