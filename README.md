@@ -10,7 +10,7 @@
 
 	
 #### Sintaxe:
-- postgresql://<user>:<password>@<host>:<port>/<database>
+	- postgresql://<user>:<password>@<host>:<port>/<database>
 
 
 #### Exemplo:
