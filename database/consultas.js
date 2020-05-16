@@ -28,31 +28,46 @@ class Consultas {
         }
 
         return this.connect.query(sql, data, (error) => {
-            let mensagem = data.length === 36 ? `${data[0]} - Cadastro da empresa realizado com sucesso!`
-                : data.length === 4 ? `${data[1]} - Cadastro CNAE Secundário realizado com sucesso`
-                    : `${data[0]} - Cadastro de socio realizado com sucesso`;
 
-            if (error) {
-                let arquivo = data.length === 36 ? data[35] : data.length === 4 ? $data[3] : $data[12];
+            if(error.code === '3D000'){
+               console.log('Conexão com banco de dados falhou !');
+            } else if(error.code === 'ECONNRESET'){
+                console.log('Reconexão vou feita, mas não teve resultados positivos !');
+            }else{
+                let mensagem = data.length === 36 ? `${data[0]} - Cadastro da empresa realizado com sucesso!`
+                    : data.length === 4 ? `${data[1]} - Cadastro CNAE Secundário realizado com sucesso`
+                        : `${data[0]} - Cadastro de socio realizado com sucesso`;
 
-                try{
-                    this.execute(`delete from empresas where arquivo = ${$arquivo}`);
-                    this.execute(`delete from cnaes where arquivo = ${$arquivo}`);
-                    this.execute(`delete from socios where arquivo = ${$arquivo}`);
-                    this.execute(`insert into falhas (arquivo, status) values (${arquivo}, 'Não foi possivel registrar cadastro, inserção falhou')`);
+                if (error) {
+                    let arquivo = data.length === 36 ? data[35] : data.length === 4 ? data[3] : data[12];
 
-                    this.file.rename('../blocos/' + arquivo, '../falhas/' + arquivo, (error) => {
-                        if (error) {
-                          console.log(error);
+                    try{
+                        this.execute(`delete from empresas where arquivo = ${arquivo}`);
+                        this.execute(`delete from cnaes where arquivo = ${arquivo}`);
+                        this.execute(`delete from socios where arquivo = ${arquivo}`);
+                        this.execute(`insert into falhas (arquivo, status) values (${arquivo}, 'Não foi possivel registrar cadastro, inserção falhou')`);
+
+                        let existFile = this.file.access('./falhas/' + arquivo, (err) => {
+                          return err ? false : true;
+                        });
+
+                        if(!existFile){
+                            this.file.rename('./blocos/' + arquivo, './falhas/' + arquivo, (error) => {
+                                if (error) {
+                                  console.log(error);
+                                }else{
+                                  console.log('Arquivo movido para pasta de falhas, nova tentiva será feita !');
+                                }
+                            });    
                         }else{
-                          console.log('Arquivo movido para pasta de falhas, nova tentiva será feita !');
+                            console.log('Falha no arquivo já registrado !');
                         }
-                    });
-                }catch(e){
-                    console.error(e);
+                    }catch(e){
+                        console.error(e);
+                    }
+                } else {
+                    console.log(mensagem);
                 }
-            } else {
-                console.log(mensagem);
             }
         });
     }
@@ -69,14 +84,20 @@ class Consultas {
         }
 
         return this.connect.query(sql, data, (error) => {
-            let mensagem = data.length === 36 ? `${data[0]} - Cadastro da empresa realizado com sucesso!`
-                : data.length === 4 ? `${data[1]} - Cadastro CNAE Secundário realizado com sucesso`
-                    : `${data[0]} - Cadastro de socio realizado com sucesso`;
+            if(error.code === '3D000'){
+              console.log('Conexão com banco de dados falhou !');
+            } else if(error.code === 'ECONNRESET'){
+                console.log('Reconexão vou feita, mas não teve resultados positivos !');
+            }else{
+                let mensagem = data.length === 36 ? `${data[0]} - Cadastro da empresa realizado com sucesso!`
+                    : data.length === 4 ? `${data[1]} - Cadastro CNAE Secundário realizado com sucesso`
+                        : `${data[0]} - Cadastro de socio realizado com sucesso`;
 
-            if (error) {
-               console.log('Não foi possivel salvar cadastro!');
-            } else {
-                console.log(mensagem);
+                if (error) {
+                   console.log('Não foi possivel salvar cadastro!');
+                } else {
+                    console.log(mensagem);
+                }
             }
         });
     }
@@ -92,34 +113,50 @@ class Consultas {
             sql = this.sql.socio;
         }
 
-        let mensagem = data.length === 36 ? `${data[0]} - Tentativa de cadastro da empresa realizado com sucesso!`
-                : data.length === 4 ? `${data[1]} -Tentativa de cadastro CNAE Secundário realizado com sucesso`
-                    : `${data[0]} - Tentativa de cadastro de socio realizado com sucesso`;
-
          return this.connect.query(sql, data, (error) => {
-            if (error) {
-                let arquivo = data.length === 36 ? data[35] : data.length === 4 ? $data[3] : $data[12];
+                if(error.code === '3D000'){
+                  console.log('Conexão com banco de dados falhou !');
+                } else if(error.code === 'ECONNRESET'){
+                    console.log('Reconexão vou feita, mas não teve resultados positivos !');
+                }else{
 
-                try{
-                    this.execute(`delete from falhas where arquivo = ${$arquivo}`);
+                    let mensagem = data.length === 36 ? `${data[0]} - Tentativa de cadastro da empresa realizado com sucesso!`
+                            : data.length === 4 ? `${data[1]} -Tentativa de cadastro CNAE Secundário realizado com sucesso`
+                                : `${data[0]} - Tentativa de cadastro de socio realizado com sucesso`;
 
-                    this.connect.query(`select*from falhas where arquivo = ${$arquivo}`, data, (error, result) => {
-                        if(result && result.rows.length === 0){
-                            this.file.unlink( '../falhas/' + arquivo, (error) => {
-                                if (error) {
-                                  console.log(error);
-                                }else{
-                                  console.log('Falhas no processo foram retomados e concluido !');
+                    if (error) {
+                        let arquivo = data.length === 36 ? data[35] : data.length === 4 ? data[3] : data[12];
+
+                        try{
+                            this.execute(`delete from falhas where arquivo = ${arquivo}`);
+
+                            this.connect.query(`select*from falhas where arquivo = ${arquivo}`, data, (error, result) => {
+                                if(result && result.rows.length === 0){
+
+                                    let existFile = this.file.access('./falhas/' + arquivo, (err) => {
+                                      return err ? false : true;
+                                    });
+
+                                    if(!existFile){
+                                        this.file.unlink( './falhas/' + arquivo, (error) => {
+                                            if (error) {
+                                              console.log(error);
+                                            }else{
+                                              console.log('Falhas no processo foram retomados e concluido !');
+                                            }
+                                        });
+                                    }else{
+                                        console.log('Arquivo ja foi reprocessado !');
+                                    }
                                 }
                             });
+                        }catch(e){
+                            console.error(e);
                         }
-                    });
-                }catch(e){
-                    console.error(e);
+                    } else {
+                        console.log(mensagem);
+                    }
                 }
-            } else {
-                console.log(mensagem);
-            }
         });
     }
 }

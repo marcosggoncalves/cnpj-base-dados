@@ -2,7 +2,7 @@
 const linebyline = require('linebyline');
 const fs = require('fs');
 const consultas = require('./database/consultas.js');
-const format = require('./format.js');
+const format = require('./utils/format.js');
 
 const falhasRecusive = ()=>{
     return fs.readdir('./falhas', (error, files) => {
@@ -10,7 +10,7 @@ const falhasRecusive = ()=>{
             files.forEach(file => {
                 linebyline('./falhas/' + file).on('line', (line, countLinhas, tamanho) => {
 
-                    let cadastro = format.array(line);
+                    let cadastro = format.array(line, file);
 
                     if (cadastro.length > 0) {
                         consultas.falhasCadastros(cadastro);
@@ -26,15 +26,20 @@ const falhasRecusive = ()=>{
 fs.readdir('./blocos', (error, files) => {
     if (files && files.length > 0) {
         files.forEach(file => {
-            linebyline('./blocos/' + file).on('line', (line, countLinhas, tamanho) => {
-                
-                let cadastro = format.array(line);
+
+            let arquivo = linebyline('./blocos/' + file);
+
+            arquivo.on('line', (line, countLinhas, tamanho) => {
+                let cadastro = format.array(line, file);
 
                 if (cadastro.length > 0) {
                     consultas.insertCadastro(cadastro);
                 }
             });
-            falhasRecusive();
+
+            // arquivo.on('close', () => {
+            //     falhasRecusive();
+            // });
         });
     } else {
         console.log('Nenhum bloco de cadastros encontrados !');
