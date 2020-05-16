@@ -4,7 +4,7 @@ const fs = require('fs');
 
 let globais = {
     linhas: [],
-    rl: linebyline('./arquivos/K3241.K03200DV.D00422.L00020'),
+    rl: linebyline('../tratamentos/arquivos/K3241.K03200DV.D00422.L00020'),
     blocoQuantidade: 8000,
     autoIncrement: 1
 };
@@ -14,7 +14,7 @@ globais.rl.on('line', (line, count, tamanho) => {
         globais.linhas.push(line);
     } else {
         let utils = {
-            nomeArquivo: `C:\\Users\\Marcos Lopes G\\Documents\\cnpj-imports\\blocos\\bloco-${globais.autoIncrement++}.txt`
+            nomeArquivo: `C:\\Users\\Marcos Lopes G\\Documents\\cnpj-imports\\tratamentos\\blocos\\bloco-${globais.autoIncrement++}.txt`
         };
         globais.linhas.forEach((linha) => {
             let createArquivo = fs.createWriteStream(utils.nomeArquivo, {
@@ -28,8 +28,7 @@ globais.rl.on('line', (line, count, tamanho) => {
             }
             createArquivo.end();
         });
+        
         globais.linhas = [];
     }
 });
-
-// node--max - old - space - size=8192 index.js

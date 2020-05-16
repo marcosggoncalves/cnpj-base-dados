@@ -4,14 +4,14 @@
   "description": "Importação para criação da base dados CNPJ do brasil inteiro",
   "main": "partition_file.js",
   "scripts": {
-      "partition": "node partition_file.js",
-      "single": "node importar_single.js",
-      "multiple": "node importar_multiple.js"
+    "partition": "node scripts/partition_file.js",
+    "single": "node scripts/importar_single.js"
   },
   "author": "Marcos Lopes - Dourasoft",
   "license": "ISC",
   "dependencies": {
     "linebyline": "^1.3.0",
-    "pg": "^8.2.0"
+    "pg": "^8.2.0",
+    "pg-format": "^1.0.4"
   }
 }

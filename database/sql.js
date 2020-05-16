@@ -13,22 +13,7 @@ const socio = `INSERT INTO socios(
                     codqualificacaorepresentante,
                     arquivo
                 ) 
-                VALUES
-                ( 
-                    $1, 
-                    $2, 
-                    $3, 
-                    $4, 
-                    $5, 
-                    $6, 
-                    $7, 
-                    $8, 
-                    $9, 
-                    $10,
-                    $11,
-                    $12,
-                    $13
-                ) RETURNING *`;
+                VALUES %L`;
 
 const cnae = `INSERT INTO cnaes(
                     tipo,
@@ -36,7 +21,7 @@ const cnae = `INSERT INTO cnaes(
                     cnae,
                     arquivo
                 )
-                VALUES ($1, $2, $3, $4)  RETURNING *;
+                VALUES %L;
             `;
 
 const  empresa = `INSERT INTO empresas(
@@ -77,45 +62,7 @@ const  empresa = `INSERT INTO empresas(
                 datasituacaoespecial, 
                 arquivo
             ) 
-            VALUES
-            ( 
-                $1,
-                $2,
-                $3,
-                $4,
-                $5,
-                $6,
-                $7,
-                $8,
-                $9,
-                $10,
-                $11,
-                $12,
-                $13,
-                $14,
-                $15,
-                $16,
-                $17,
-                $18,
-                $19,
-                $20,
-                $21,
-                $22,
-                $23,
-                $24,
-                $25,
-                $26,
-                $27,
-                $28,
-                $29,
-                $30,
-                $31,
-                $32,
-                $33,
-                $34,
-                $35,
-                $36
-            ) RETURNING *`;
+            VALUES %L`;
 
 
 module.exports = {empresa, socio, cnae};

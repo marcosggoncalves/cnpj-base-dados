@@ -1,6 +1,6 @@
 # Importação CNPJ
 
-### Realiza a conexão com banco de dados POSTGRES 'config.js'
+### Realiza a conexão com banco de dados POSTGRES 'utils/config.js'
 	
 	user: postgres
 	password: root
@@ -18,9 +18,10 @@
 
 
 ### Criar pastas
-	 1. arquivos
-	 2. blocos
-	 3. falhas
+	1.tratamentos
+		 1.1 arquivos
+		 1.2 blocos
+		 1.3 falhas
 
 ### Altere o caminho da pasta blocos no arquivo 'index.js - linha 17'
 
@@ -39,4 +40,3 @@
 	1. npm install - Instalar pacotes
 	2. npm run partition - Parcionar arquivo em blocos
     3. npm run single '<nome do arquivo>.txt' - Iniciar processamento de um único arquivo de cadastro
-    4. npm run multiple - Iniciar processamento de varios arquivos de cadastros
