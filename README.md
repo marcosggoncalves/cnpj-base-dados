@@ -19,6 +19,12 @@
 	 - blocos
 	 - falhas
 
+### Altere o caminho da pasta blocos no arquivo 'index.js - linha 17'
+
+	let utils = {
+        nomeArquivo: `<caminho>\\lote${globais.autoIncrement++}.txt`
+    };
+
 ### Baixar o arquivo da Receita Federal para realizar o parcionamento em blocos
 
 <a href="http://receita.economia.gov.br/orientacao/tributaria/cadastros/cadastro-nacional-de-pessoas-juridicas-cnpj/dados-publicos-cnpj">Acessar site Receita Federal</a>
