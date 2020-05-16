@@ -62,9 +62,3 @@ create table cnaes(
    cnae varchar(255),
    arquivo varchar(255)
 );
-
-create table falhas(
-  id  serial not null primary key,
-  arquivo text,
-  status varchar(255)
-);

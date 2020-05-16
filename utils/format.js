@@ -126,7 +126,7 @@ class Format {
                 linha.substr(270, 11).trim(),
                 linha.substr(281, 60).trim(),
                 linha.substr(341, 2).trim(),
-                arquivo
+                arquivo,
             ];
         }
 
