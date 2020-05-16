@@ -23,6 +23,8 @@
 
 <a href="http://receita.economia.gov.br/orientacao/tributaria/cadastros/cadastro-nacional-de-pessoas-juridicas-cnpj/dados-publicos-cnpj">Acessar site Receita Federal</a>
 
+	- Adicione o arquivo "baixado no site" dentro da  pasta "arquivos"
+
 ### Execute node index.js
 	- Realiza a separação do arquivo em blocos
 
