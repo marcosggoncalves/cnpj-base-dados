@@ -5,7 +5,8 @@
   "main": "partition_file.js",
   "scripts": {
     "partition": "node scripts/partition_file.js",
-    "single": "node scripts/importar_single.js"
+    "single": "node scripts/importar_single.js",
+    "flaws": "node scripts/flaws_files.js"
   },
   "author": "Marcos Lopes - Dourasoft",
   "license": "ISC",

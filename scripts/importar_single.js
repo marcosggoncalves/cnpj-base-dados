@@ -27,7 +27,7 @@ if(params != null && existFile){
     if(!params){    
         console.log('Arquivo não informado, informe o nome do arquivo !');   
     }else{
-        console.log('Arquivo não encontrado no sistema !');
+        console.log('Arquivo não encontrado no sistema, arquivo pode ter falhado, com isso, foi movido para pasta de falhas, execute o script de falhas  para reniciar o processo novamente!');
     }
 }
 

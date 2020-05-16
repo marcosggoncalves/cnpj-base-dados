@@ -40,3 +40,4 @@
 	1. npm install - Instalar pacotes
 	2. npm run partition - Parcionar arquivo em blocos
     3. npm run single '<nome do arquivo>.txt' - Iniciar processamento de um único arquivo de cadastro
+    4. npm  run flaws Processar arquivos com falhas 

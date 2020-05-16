@@ -58,11 +58,11 @@ class Consultas {
                             let existFile = this.file.existsSync('./tratamentos/falhas/' + arquivo);
                             
                             if(!existFile){
-                                this.file.rename('./tratamentos/blocos/' + arquivo, './tratamentos/falhas/' + arquivo, (error)=>{
+                                this.file.rename('./tratamentos/blocos/' + arquivo, './tratamentos/falhas/processar' + arquivo, (error)=>{
                                     console.log('Falha registrado, processo será reniciado em breve.');
                                 });
                             }else{
-                                console.log('Falha no arquivo já registrado !');
+                                console.log('Falha no arquivo já registrado, tente reniciar o processamento novamente !');
                             }
                         }catch(e){
                             console.error(e);
