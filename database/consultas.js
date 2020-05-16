@@ -57,6 +57,30 @@ class Consultas {
         });
     }
 
+    insertCadastroSingle(data) {
+        let sql = null;
+
+        if (data.length === 36) {
+            sql = this.sql.empresa;
+        } else if (data.length === 4) {
+            sql = this.sql.cnae;
+        } else {
+            sql = this.sql.socio;
+        }
+
+        return this.connect.query(sql, data, (error) => {
+            let mensagem = data.length === 36 ? `${data[0]} - Cadastro da empresa realizado com sucesso!`
+                : data.length === 4 ? `${data[1]} - Cadastro CNAE Secundário realizado com sucesso`
+                    : `${data[0]} - Cadastro de socio realizado com sucesso`;
+
+            if (error) {
+               console.log('Não foi possivel salvar cadastro!');
+            } else {
+                console.log(mensagem);
+            }
+        });
+    }
+
     falhasCadastros(data){
         let sql = null;
 

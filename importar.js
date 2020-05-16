@@ -12,6 +12,6 @@ linebyline('./blocos/' + params).on('line', (line, countLinhas, tamanho) => {
 	let cadastro = format.array(line, params);
 
     if (cadastro.length > 0) {
-        consultas.insertCadastro(cadastro);
+        consultas.insertCadastroSingle(cadastro);
     }
 });
