@@ -35,9 +35,9 @@ if (params != null && existFile) {
 	}).on('close', ()=>{
 		console.log(`Arquivo recebido: ${params}`);
 		console.log('=========== Leitura finalizada ===============')
-		console.log(`(${count.empresas}) Empresas cadastros`);
-		console.log(`(${count.socios}) Socios cadastros.`);
-		console.log(`(${count.cnaes}) Cnaes cadastros.`);
+		console.log(`(${count.empresas}) Empresas cadastrados`);
+		console.log(`(${count.socios}) Socios cadastrados.`);
+		console.log(`(${count.cnaes}) Cnaes cadastrados.`);
 	});
 } else {
 	if (!params) {
