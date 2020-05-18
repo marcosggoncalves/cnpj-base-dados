@@ -9,19 +9,35 @@ let argv = process.argv;
 let params = argv[2];
 let existFile = fs.existsSync('./tratamentos/' + params);
 
+
+let count = {
+	empresas: 0,
+    socios: 0,
+    cnaes: 0
+}
+
 if (params != null && existFile) {
 	linebyline('./tratamentos/' + params).on('line', (line) => {
 		let cadastro = format.array(line, params);
 
 		if (cadastro.length === 36) {
 			consultas.insertCadastroSingle([cadastro], 'empresas');
+			count.empresas++;
 		}
 		if (cadastro.length === 4) {
 			consultas.insertCadastroSingle([cadastro], 'cnaes');
+			count.cnaes++;
 		}
 		if (cadastro.length === 13) {
 			consultas.insertCadastroSingle([cadastro], 'socios');
+			count.socios++;
 		}
+	}).on('close', ()=>{
+		console.log(`Arquivo recebido: ${params}`);
+		console.log('=========== Leitura finalizada ===============')
+		console.log(`(${count.empresas}) Empresas cadastros`);
+		console.log(`(${count.socios}) Socios cadastros.`);
+		console.log(`(${count.cnaes}) Cnaes cadastros.`);
 	});
 } else {
 	if (!params) {

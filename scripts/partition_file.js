@@ -30,7 +30,7 @@ globais.rl.on('line', (line) => {
         }
 
         let utils = {
-            nomeArquivo: `./tratamentos\\blocos_20${params}\\bloco-${globais.autoIncrement++}.txt`
+            nomeArquivo: `D:\\cnpj-base-dados\tratamentos\\blocos_20${params}\\bloco-${globais.autoIncrement++}.txt`
         };
         globais.linhas.forEach((linha) => {
             let createArquivo = fs.createWriteStream(utils.nomeArquivo, {

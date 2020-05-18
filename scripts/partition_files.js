@@ -26,7 +26,7 @@ fs.readdir('./tratamentos/arquivos', (error, files) => {
                 }
 
                 let utils = {
-                    nomeArquivo: `/tratamentos\\${pasta}\\bloco-${autoIncrement++}.txt`
+                    nomeArquivo: `D:\\cnpj-base-dados\\tratamentos\\${pasta}\\bloco-${autoIncrement++}.txt`
                 };
 
                 globais.linhas.forEach((linha) => {

@@ -84,8 +84,6 @@ class Consultas {
                         } catch (e) {
                             console.error(e);
                         }
-                    } else {
-                        console.log(`(${data.length})${tipo} - cadastros salvos.`);
                     }
                 }
             });
