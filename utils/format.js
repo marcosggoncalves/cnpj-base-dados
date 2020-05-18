@@ -61,10 +61,10 @@ class Format {
 
         if (linha.substr(0, 1).trim() === '6') {
             return {
-                "tipo" : linha.substr(0, 1).trim(),
-                "cnpj" : linha.substr(3, 14).trim(),
-                "cnae" : linha.substr(17, 7).trim(),
-                "arquivo" : arquivo
+                "tipo": linha.substr(0, 1).trim(),
+                "cnpj": linha.substr(3, 14).trim(),
+                "cnae": linha.substr(17, 7).trim(),
+                "arquivo": arquivo
             };
         }
 
@@ -111,7 +111,7 @@ class Format {
                 arquivo
             ];
         }
-        
+
         if (linha.substr(0, 1).trim() === '2') {
             return [
                 linha.substr(3, 14).trim(),
@@ -131,7 +131,7 @@ class Format {
         }
 
         if (linha.substr(0, 1).trim() === '6') {
-            return  [
+            return [
                 linha.substr(0, 1).trim(),
                 linha.substr(3, 14).trim(),
                 linha.substr(17, 7).trim(),
@@ -140,6 +140,29 @@ class Format {
         }
 
         return [];
+    }
+
+    rename(name) {
+        let remove = [
+            {
+                remove: '.txt',
+                sub: ''
+            },
+            {
+                remove: '/',
+                sub: '_'
+            },
+            {
+                remove: '-',
+                sub: '_'
+            }
+        ];
+
+        remove.forEach(formt => {
+            name = name.replace(formt.remove, formt.sub);
+        })
+
+        return name;
     }
 }
 

@@ -5,9 +5,19 @@ class Consultas {
         this.file = require('fs');
         this.sql = require('./sql.js');
         this.formatSQL = require('pg-format');
+        this.format = require('../utils/format.js');
+        this.process = require('process');
     }
 
     insertCadastroSingle(data, tipo) {
+        let arquivo = null;
+
+        if (data && data[0].length > 1) {
+            arquivo = data[0].length === 36 ? data[0][35] : data[0].length === 4 ? data[0][3] : data[0][12];
+        } else {
+            arquivo = data.length === 36 ? data[35] : data.length === 4 ? data[3] : data[12];
+        }
+
         if (data.length < 0) {
             console.log('Elemento vazio, tente novamente !');
         } else {
@@ -30,7 +40,7 @@ class Consultas {
                     if (error) {
                         let arquivo = null;
 
-                        if (data && data[0][35]) {
+                        if (data && data[0].length > 1) {
                             arquivo = data[0].length === 36 ? data[0][35] : data[0].length === 4 ? data[0][3] : data[0][12];
                         } else {
                             arquivo = data.length === 36 ? data[35] : data.length === 4 ? data[3] : data[12];
@@ -55,14 +65,21 @@ class Consultas {
                                 });
                             }
 
-                            let existFile = this.file.existsSync('./tratamentos/falhas/' + arquivo);
+                            let existFile = this.file.existsSync(`./tratamentos/falhas/processar_${this.format.rename(arquivo)}`);
 
                             if (!existFile) {
-                                this.file.rename('./tratamentos/' + arquivo, './tratamentos/falhas/processar' + arquivo, (error) => {
-                                    console.log('Falha registrado, processo será reniciado em breve.');
+                                this.file.rename('./tratamentos/' + arquivo, `./tratamentos/falhas/processar_${this.format.rename(arquivo)}.txt`, (error) => {
+                                    if (error) {
+                                        console.error(error);
+                                        process.exit(0);
+                                    } else {
+                                        console.log('Falha registrada, renicie nova leitura "npm run flaws"');
+                                        process.exit(0);
+                                    }
                                 });
                             } else {
-                                console.log('Falha no arquivo já registrado, tente reniciar o processamento novamente !');
+                                console.log('Falha no arquivo já registrado, renicie nova leitura "npm run flaws"');
+                                process.exit(0);
                             }
                         } catch (e) {
                             console.error(e);
