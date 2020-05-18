@@ -6,11 +6,11 @@ class Consultas {
         this.sql = require('./sql.js');
         this.formatSQL = require('pg-format');
     }
-    
+
     insertCadastroSingle(data, tipo) {
-        if(data.length < 0){
+        if (data.length < 0) {
             console.log('Elemento vazio, tente novamente !');
-        }else{
+        } else {
             let sql = null;
 
             if (tipo === 'empresas') {
@@ -22,49 +22,49 @@ class Consultas {
             }
 
             return this.connect.query(sql, (error) => {
-                if(error && error.code === '3D000'){
-                  console.log('Conexão com banco de dados falhou !');
-                } else if(error && error.code === 'ECONNRESET'){
+                if (error && error.code === '3D000') {
+                    console.log('Conexão com banco de dados falhou !');
+                } else if (error && error.code === 'ECONNRESET') {
                     console.log('Reconexão vou feita, mas não teve resultados positivos !');
-                }else{
+                } else {
                     if (error) {
                         let arquivo = null;
-                        
-                        if(data && data[0][35]){
+
+                        if (data && data[0][35]) {
                             arquivo = data[0].length === 36 ? data[0][35] : data[0].length === 4 ? data[0][3] : data[0][12];
-                        }else{
+                        } else {
                             arquivo = data.length === 36 ? data[35] : data.length === 4 ? data[3] : data[12];
                         }
 
-                        try{
-                            if(arquivo != null){
-                                let comandos  = [
+                        try {
+                            if (arquivo != null) {
+                                let comandos = [
                                     this.formatSQL("delete from empresas where arquivo = %L", arquivo),
                                     this.formatSQL("delete from cnaes where arquivo = %L", arquivo),
                                     this.formatSQL("delete from socios where arquivo = %L", arquivo)
                                 ];
 
-                                comandos.forEach(comand=>{
-                                   this.connect.query(comand, (error, result) => {
-                                        if(error){
+                                comandos.forEach(comand => {
+                                    this.connect.query(comand, (error, result) => {
+                                        if (error) {
                                             console.error(error);
-                                        }else{
+                                        } else {
                                             console.log('Comando executado: ' + comand);
                                         }
-                                   });
-                                });    
+                                    });
+                                });
                             }
-                            
+
                             let existFile = this.file.existsSync('./tratamentos/falhas/' + arquivo);
-                            
-                            if(!existFile){
-                                this.file.rename('./tratamentos/blocos/' + arquivo, './tratamentos/falhas/processar' + arquivo, (error)=>{
+
+                            if (!existFile) {
+                                this.file.rename('./tratamentos/' + arquivo, './tratamentos/falhas/processar' + arquivo, (error) => {
                                     console.log('Falha registrado, processo será reniciado em breve.');
                                 });
-                            }else{
+                            } else {
                                 console.log('Falha no arquivo já registrado, tente reniciar o processamento novamente !');
                             }
-                        }catch(e){
+                        } catch (e) {
                             console.error(e);
                         }
                     } else {

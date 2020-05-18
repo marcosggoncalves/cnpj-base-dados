@@ -7,27 +7,27 @@ const process = require('process');
 
 let argv = process.argv;
 let params = argv[2];
-let existFile = fs.existsSync('./tratamentos/blocos/' + params);
+let existFile = fs.existsSync('./tratamentos/' + params);
 
-if(params != null && existFile){
-	linebyline('./tratamentos/blocos/' + params).on('line', (line, countLinhas, tamanho) => {
+if (params != null && existFile) {
+	linebyline('./tratamentos/' + params).on('line', (line) => {
 		let cadastro = format.array(line, params);
 
-    	if(cadastro.length === 36){
-        	consultas.insertCadastroSingle([cadastro],'empresas');
-    	}
-    	if(cadastro.length === 4){
-        	consultas.insertCadastroSingle([cadastro],'cnaes');
-    	}
-    	if(cadastro.length === 13){
-        	consultas.insertCadastroSingle([cadastro],'socios');
-    	}	    
+		if (cadastro.length === 36) {
+			consultas.insertCadastroSingle([cadastro], 'empresas');
+		}
+		if (cadastro.length === 4) {
+			consultas.insertCadastroSingle([cadastro], 'cnaes');
+		}
+		if (cadastro.length === 13) {
+			consultas.insertCadastroSingle([cadastro], 'socios');
+		}
 	});
-}else{
-    if(!params){    
-        console.log('Arquivo não informado, informe o nome do arquivo !');   
-    }else{
-        console.log('Arquivo não encontrado no sistema, arquivo pode ter falhado, com isso, foi movido para pasta de falhas, execute o script de falhas  para reniciar o processo novamente!');
-    }
+} else {
+	if (!params) {
+		console.log('Arquivo não informado, informe o nome do arquivo !');
+	} else {
+		console.log('Arquivo não encontrado no sistema, arquivo pode ter falhado, com isso, foi movido para pasta de falhas, execute o script de falhas  para reniciar o processo novamente!');
+	}
 }
 

@@ -1,7 +1,7 @@
 module.exports = {
-	user:'postgres',
+	user: 'postgres',
 	password: 'root',
 	port: 5432,
-	host:'localhost',
-	database: 'cnpjs'
+	host: 'localhost',
+	database: 'cnpj_empresas'
 };
