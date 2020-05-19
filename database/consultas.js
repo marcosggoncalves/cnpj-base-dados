@@ -10,7 +10,13 @@ class Consultas {
     }
 
     insertCadastroSingle(data, tipo) {
+
         let arquivo = null;
+
+        let txt = this.file.createWriteStream("log_error.txt", {
+            flags: 'a'
+        });
+
 
         if (data && data[0].length > 1) {
             arquivo = data[0].length === 36 ? data[0][35] : data[0].length === 4 ? data[0][3] : data[0][12];
@@ -57,7 +63,10 @@ class Consultas {
                                 comandos.forEach(comand => {
                                     this.connect.query(comand, (error, result) => {
                                         if (error) {
-                                            console.error(error);
+                                            if (!txt.write(error.stack + '\n')) {
+                                                console.error('Não foi possivel gravar log !');
+                                            }
+                                            console.error(error.stack);
                                         } else {
                                             console.log('Comando executado: ' + comand);
                                         }
@@ -65,23 +74,27 @@ class Consultas {
                                 });
                             }
 
-                            let existFile = this.file.existsSync(`./tratamentos/falhas/processar_${this.format.rename(arquivo)}`);
+                            let name = this.format.rename(arquivo);
+                            let existFile = this.file.existsSync(`./tratamentos/falhas/processar_${name}.txt`);
 
                             if (!existFile) {
-                                this.file.rename('./tratamentos/' + arquivo, `./tratamentos/falhas/processar_${this.format.rename(arquivo)}.txt`, (error) => {
+                                this.file.rename('./tratamentos/' + arquivo, `./tratamentos/falhas/processar_${name}.txt`, (error) => {
                                     if (error) {
+                                        if (!txt.write(error + '\n')) {
+                                            console.error('Não foi possivel gravar log !');
+                                        }
                                         console.error(error);
-                                        process.exit(0);
                                     } else {
                                         console.log('Falha registrada, renicie nova leitura "npm run flaws"');
-                                        process.exit(0);
                                     }
                                 });
                             } else {
                                 console.log('Falha no arquivo já registrado, renicie nova leitura "npm run flaws"');
-                                process.exit(0);
                             }
                         } catch (e) {
+                            if (!txt.write(e + '\n')) {
+                                console.error('Não foi possivel gravar log !');
+                            }
                             console.error(e);
                         }
                     }

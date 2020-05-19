@@ -155,6 +155,14 @@ class Format {
             {
                 remove: '-',
                 sub: '_'
+            },
+            {
+                remove: '\\',
+                sub: '_'
+            },
+            {
+                remove: '//',
+                sub: '_'
             }
         ];
 

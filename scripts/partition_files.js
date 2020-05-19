@@ -14,8 +14,8 @@ fs.readdir('./tratamentos/arquivos', (error, files) => {
 
         let autoIncrement = 1;
 
-        linebyline(`./tratamentos/arquivos/${file}`).on('line', (line) => {
-
+        linebyline(`./tratamentos/arquivos/${file}`)
+            .on('line', (line) => {
             if (globais.linhas.length < globais.blocoQuantidade) {
                 globais.linhas.push(line);
             } else {
@@ -38,13 +38,14 @@ fs.readdir('./tratamentos/arquivos', (error, files) => {
                         console.error('Não foi possivel gravar linha');
                     } else {
                         globais.totalRowsArquivo++;
-                        console.error(`Total linhas arquivo principal: ${globais.totalRowsArquivo} - linha gravada no bloco de arquivo número ${autoIncrement - 1}.`);
                     }
                     createArquivo.end();
                 });
 
                 globais.linhas = [];
             }
+        }).on('close', ()=>{
+            console.error(`${globais.totalRowsArquivo} - linha gravada no bloco de arquivo "bloco-${autoIncrement++}.txt"`);
         });
     })
 });

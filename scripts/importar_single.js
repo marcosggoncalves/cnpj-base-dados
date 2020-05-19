@@ -33,11 +33,22 @@ if (params != null && existFile) {
 			count.socios++;
 		}
 	}).on('close', ()=>{
-		console.log(`Arquivo recebido: ${params}`);
-		console.log('=========== Leitura finalizada ===============')
-		console.log(`(${count.empresas}) Empresas cadastrados`);
-		console.log(`(${count.socios}) Socios cadastrados.`);
-		console.log(`(${count.cnaes}) Cnaes cadastrados.`);
+
+		let mensagem = `Arquivo recebido: ${params}` + 
+		`\n=========== Leitura finalizada ===============` + 
+		`\n(${count.empresas}) Empresas cadastrados` + 
+		`\n(${count.socios}) Socios cadastrados.`+
+		`\n(${count.cnaes}) Cnaes cadastrados. \n`;
+
+		let txt = fs.createWriteStream("log.txt", {
+            flags: 'a'
+        });
+
+		if (!txt.write(mensagem + '\n')) {
+			console.error('Não foi possivel gravar log !');
+		}
+		
+		console.log(mensagem);
 	});
 } else {
 	if (!params) {

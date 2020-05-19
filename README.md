@@ -12,23 +12,24 @@
 #### Sintaxe:
 	- postgresql://<user>:<password>@<host>:<port>/<database>
 
-
 #### Exemplo:
     - postgresql://postgres:root@localhost:5432/cnpj_empresas
 
 ### Altere o caminho da pasta blocos no arquivo 'index.js - linha 17'
 
 	let utils = {
-        nomeArquivo: `<caminho>\\lote${globais.autoIncrement++}.txt`
-    };
+		nomeArquivo: '<caminho>'\\blocos_20${params}\\bloco-${globais.autoIncrement++}.txt`
+	};
 
 ### Criar pastas
 	1.tratamentos
-		 1.1 arquivos
-		 1.2 blocos
-		 1.3 falhas
+		1.1 arquivos
+		1.2 falhas
 
-
+## OBS:
+	
+	Arquivos log.txt e log_error_txt.log serão criados automaticamente pelo código
+	
 ### Baixar o arquivo da Receita Federal para realizar o parcionamento em blocos
 
 <a href="http://receita.economia.gov.br/orientacao/tributaria/cadastros/cadastro-nacional-de-pessoas-juridicas-cnpj/dados-publicos-cnpj">Acessar site Receita Federal</a>
