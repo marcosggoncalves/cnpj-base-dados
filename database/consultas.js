@@ -38,10 +38,7 @@ class Consultas {
                 } else if (error && error.code === 'ECONNRESET') {
                     console.log('Reconexão vou feita, mas não teve resultados positivos !');
                 } else {
-                    if (error) {
-
-                        console.log(error);
-                        return false;
+                    if (error && error.code != '08P01') {
 
                         console.log("+++++++++++++++ Error (Remoção de fila iniciada) ++++++++++++++++++");
                         console.log(error);
