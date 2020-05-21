@@ -9,7 +9,9 @@
     "single": "node scripts/importar_single.js",
     "flaws": "node scripts/flaws_files.js",
     "count": "node scripts/count_files.js",
-    "download": "node scripts/download_files.js"
+    "download": "node scripts/download_files.js",
+    "states": "node scripts/consultas/create_table_estados.js",
+    "report": "node scripts/consultas/relatorios.js"
   },
   "author": "Marcos Lopes - Dourasoft",
   "license": "ISC",

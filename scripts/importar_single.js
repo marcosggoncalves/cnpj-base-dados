@@ -47,8 +47,10 @@ if (params != null && existFile) {
 		if (!txt.write(mensagem + '\n')) {
 			console.error('Não foi possivel gravar log !');
 		}
-		
 		console.log(mensagem);
+
+
+		txt.end();
 	});
 } else {
 	if (!params) {

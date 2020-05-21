@@ -77,7 +77,7 @@ class Format {
                 linha.substr(0, 1).trim(),
                 linha.substr(18, 150).trim(),
                 linha.substr(167, 55).trim(),
-                linha.substr(224, 2).trim(),
+                linha.substr(223, 2).trim(),
                 linha.substr(225, 8).trim(),
                 linha.substr(233, 2).trim(),
                 linha.substr(235, 2).trim(),

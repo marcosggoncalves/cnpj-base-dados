@@ -44,3 +44,5 @@
 	5. npm run partitions Parcionar multiplos arquivos em blocos
 	6. npm run count "numero arquivo " - Contador de linhas
 	7. npm run download  Baixar todos arquivos cnpj do servidor da receita federal(Demora um pouco, depende da internet);
+	8. npm run states - Separa cnpjs por estados
+	9. npm run report - criar relatorios(SQL) especificos para Dourasoft
