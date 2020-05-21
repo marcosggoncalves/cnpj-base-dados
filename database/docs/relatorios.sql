@@ -169,3 +169,9 @@ insert into  relatorios.cnaes_6920601
     arquivo
 
 from empresas_secund where cnaefiscal like '6920601%';
+
+select count('*') as empresas_ativas from empresas where situacaocadastral = '2';
+select count('*') as empresas_ativas from empresas_secund where situacaocadastral = '2';
+
+select*from empresas where situacaocadastral = '2';
+select*from empresas_secund where situacaocadastral = '2';
