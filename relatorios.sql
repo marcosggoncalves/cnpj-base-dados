@@ -1,12 +1,14 @@
 
-create table relatorios.cnaes_8299706 as  select*from empresas where cnaefiscal = '8299706';
-create table relatorios.cnaes_941 as select*from empresas where cnaefiscal like '941%';
-create table relatorios.cnaes_942 as select*from empresas where cnaefiscal like '942%';
-create table relatorios.cnaes_943 as select*from empresas where cnaefiscal like '943%';
-create table relatorios.cnaes_949 as select*from empresas where cnaefiscal like '949%';
-create table relatorios.cnaes_81125  as select*from empresas_secund where cnaefiscal like '81125%';
-create table relatorios.cnaes_6920601  select*from empresas_secund where cnaefiscal like '6920601%';
-insert into  relatorios.cnaes_8299706
+create table cnaes_8299706 as  select*from empresas where cnaefiscal = '8299706%';
+create table cnaes_941 as select*from empresas where cnaefiscal like '941%';
+create table cnaes_942 as select*from empresas where cnaefiscal like '942%';
+create table cnaes_943 as select*from empresas where cnaefiscal like '943%';
+create table cnaes_949 as select*from empresas where cnaefiscal like '949%';
+create table cnaes_81125  as select*from empresas_secund where cnaefiscal like '81125%';
+create table cnaes_6920601  select*from empresas_secund where cnaefiscal like '6920601%';
+
+
+insert into cnaes_8299706
 (
     cnpj, tipo, razaosocial, nomefantasia, situacaocadastral, datasituacaocadastral, 
     motivosituacaocadastrao, nomecidadeexterior, codigopais, nomepais, 
@@ -27,9 +29,9 @@ insert into  relatorios.cnaes_8299706
     dataexclusaosimples, opcaopelomei, situacaoespecial, datasituacaoespecial, 
     arquivo
 
-from empresas_secund where cnaefiscal = '8299706';
+from empresas_secund where cnaefiscal = '8299706%';
 
-insert into  relatorios.cnaes_941
+insert into cnaes_941
 (
     cnpj, tipo, razaosocial, nomefantasia, situacaocadastral, datasituacaocadastral, 
     motivosituacaocadastrao, nomecidadeexterior, codigopais, nomepais, 
@@ -52,7 +54,7 @@ insert into  relatorios.cnaes_941
 
 from empresas_secund where cnaefiscal like '941%';
 
-insert into  relatorios.cnaes_942
+insert into cnaes_942
 (
     cnpj, tipo, razaosocial, nomefantasia, situacaocadastral, datasituacaocadastral, 
     motivosituacaocadastrao, nomecidadeexterior, codigopais, nomepais, 
@@ -75,7 +77,7 @@ insert into  relatorios.cnaes_942
 
 from empresas_secund where cnaefiscal like '942%';
 
-insert into  relatorios.cnaes_943
+insert into cnaes_943
 (
     cnpj, tipo, razaosocial, nomefantasia, situacaocadastral, datasituacaocadastral, 
     motivosituacaocadastrao, nomecidadeexterior, codigopais, nomepais, 
@@ -98,7 +100,7 @@ insert into  relatorios.cnaes_943
 
 from empresas_secund where cnaefiscal like '943%';
 
-insert into  relatorios.cnaes_949
+insert into cnaes_949
 (
     cnpj, tipo, razaosocial, nomefantasia, situacaocadastral, datasituacaocadastral, 
     motivosituacaocadastrao, nomecidadeexterior, codigopais, nomepais, 
@@ -123,7 +125,7 @@ insert into  relatorios.cnaes_949
 from empresas_secund where cnaefiscal like '949%';
 
 
-insert into  relatorios.cnaes_81125
+insert into cnaes_81125
 (
     cnpj, tipo, razaosocial, nomefantasia, situacaocadastral, datasituacaocadastral, 
     motivosituacaocadastrao, nomecidadeexterior, codigopais, nomepais, 
@@ -147,7 +149,7 @@ arquivo
 from empresas_secund where cnaefiscal like '81125%';
 
 
-insert into  relatorios.cnaes_6920601
+insert into cnaes_6920601
 (
     cnpj, tipo, razaosocial, nomefantasia, situacaocadastral, datasituacaocadastral, 
     motivosituacaocadastrao, nomecidadeexterior, codigopais, nomepais, 
@@ -175,3 +177,4 @@ select count('*') as empresas_ativas from empresas_secund where situacaocadastra
 
 select razaosocial,nomefantasia,telefone1,telefone2,telefone3,email from empresas where situacaocadastral = '2';
 select razaosocial,nomefantasia,telefone1,telefone2,telefone3,email from empresas_secund where situacaocadastral = '2';
+
