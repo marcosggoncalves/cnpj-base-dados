@@ -23,13 +23,14 @@ class Consultas {
             console.log('Elemento vazio, tente novamente !');
         } else {
             let sql = null;
+            let partition = arquivo.slice(9, 11);
 
             if (tipo === 'empresas') {
-                sql = this.formatSQL(this.sql.empresa, data);
+                sql = this.formatSQL(this.sql.empresa(tipo, partition), data);
             } else if (tipo === 'cnaes') {
-                sql = this.formatSQL(this.sql.cnae, data);
+                sql = this.formatSQL(this.sql.cnae(tipo, partition), data);
             } else {
-                sql = this.formatSQL(this.sql.socio, data);
+                sql = this.formatSQL(this.sql.socio(tipo, partition), data);
             }
 
             return this.connect.query(sql, (error) => {
@@ -42,14 +43,6 @@ class Consultas {
 
                         console.log("+++++++++++++++ Error (Remoção de fila iniciada) ++++++++++++++++++");
                         console.log(error);
-
-                        let arquivo = null;
-
-                        if (data && data[0].length > 1) {
-                            arquivo = data[0].length === 36 ? data[0][35] : data[0].length === 4 ? data[0][3] : data[0][12];
-                        } else {
-                            arquivo = data.length === 36 ? data[35] : data.length === 4 ? data[3] : data[12];
-                        }
 
                         try {
                             if (arquivo != null) {
@@ -70,11 +63,11 @@ class Consultas {
                                 });
                             }
 
-                            let name = this.format.rename(arquivo);
-                            let existFile = this.file.existsSync(`./tratamentos/falhas/processar_${name}.txt`);
+                            // let name = this.format.rename(arquivo);
+                            let existFile = this.file.existsSync(`./tratamentos/falhas/${arquivo}`);
 
                             if (!existFile) {
-                                this.file.rename('./tratamentos/' + arquivo, `./tratamentos/falhas/processar_${name}.txt`, (error) => {
+                                this.file.rename('./tratamentos/' + arquivo, `./tratamentos/falhas/${arquivo}`, (error) => {
                                     if (error) {
                                         console.error(error);
                                     } else {
