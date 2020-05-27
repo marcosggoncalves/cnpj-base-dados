@@ -12,7 +12,8 @@
     "download": "node scripts/download_files.js",
     "states": "node scripts/consultas/create_table_estados.js",
     "report": "node scripts/consultas/relatorios.js",
-    "tables": "node scripts/create_tabel_partion.js"
+    "tables": "node scripts/create_tabel_partion.js",
+    "json": "node scripts/createJson.js"
   },
   "author": "Marcos Lopes - Dourasoft",
   "license": "ISC",

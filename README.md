@@ -46,3 +46,4 @@
 	7. npm run download  Baixar todos arquivos cnpj do servidor da receita federal(Demora um pouco, depende da internet);
 	8. npm run states - Separa cnpjs por estados
 	9. npm run report - criar relatorios(SQL) especificos para Dourasoft
+	10. npm run json '<pasta>/<nome do arquivo>.txt' - converter arquivo e json

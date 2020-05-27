@@ -12,8 +12,8 @@ let existFile = fs.existsSync('./tratamentos/' + params);
 
 let count = {
 	empresas: 0,
-    socios: 0,
-    cnaes: 0
+	socios: 0,
+	cnaes: 0
 }
 
 if (params != null && existFile) {
@@ -32,17 +32,17 @@ if (params != null && existFile) {
 			consultas.insertCadastroSingle([cadastro], 'socios');
 			count.socios++;
 		}
-	}).on('close', ()=>{
+	}).on('close', () => {
 
-		let mensagem = `Arquivo recebido: ${params}` + 
-		`\n=========== Leitura finalizada ===============` + 
-		`\n(${count.empresas}) Empresas cadastrados` + 
-		`\n(${count.socios}) Socios cadastrados.`+
-		`\n(${count.cnaes}) Cnaes cadastrados. \n`;
+		let mensagem = `Arquivo recebido: ${params}` +
+			`\n=========== Leitura finalizada ===============` +
+			`\n(${count.empresas}) Empresas cadastrados` +
+			`\n(${count.socios}) Socios cadastrados.` +
+			`\n(${count.cnaes}) Cnaes cadastrados. \n`;
 
 		let txt = fs.createWriteStream("log.txt", {
-            flags: 'a'
-        });
+			flags: 'a'
+		});
 
 		if (!txt.write(mensagem + '\n')) {
 			console.error('Não foi possivel gravar log !');

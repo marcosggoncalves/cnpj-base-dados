@@ -6,7 +6,7 @@ class Format {
                 "tipo": linha.substr(0, 1).trim(),
                 "razaoSocial": linha.substr(18, 150).trim(),
                 "nomeFantasia": linha.substr(167, 55).trim(),
-                "situacaoCadastral": linha.substr(224, 2).trim(),
+                "situacaoCadastral": linha.substr(223, 2).trim(),
                 "dataSituacaoCadastral": linha.substr(225, 8).trim(),
                 "motivoSituacaoCadastrao": linha.substr(233, 2).trim(),
                 "nomeCidadeExterior": linha.substr(235, 2).trim(),
